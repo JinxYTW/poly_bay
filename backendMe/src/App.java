@@ -1,28 +1,22 @@
 
 import java.sql.SQLException;
+
+import dao.ProductsDAO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-
-
 import database.PolyBayDatabase;
+
+import models.Product;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
-        PolyBayDatabase database = new PolyBayDatabase();
+        ProductsDAO productsDAO = new ProductsDAO();
         
 
 
-        try {
-            PreparedStatement statement =database.prepareStatement("SELECT * FROM product");
-            ResultSet result = statement.executeQuery();
-            while(result.next()){
-                System.out.println(result.getString("name"));
-            }
-            
-            
-        } catch (SQLException exception) {
-            System.err.println("An error occurred while preparing the statement.");
+        for (Product product : productsDAO.findAll()) {
+            System.out.println(product);
         }
         
 
