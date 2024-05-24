@@ -13,6 +13,7 @@ class ProductsView{
         for (let product of products){
             this.#displayProducts(product);
         }
+        this.#addButtonListeners();
         
     }
     #displayProducts(product){
@@ -25,6 +26,18 @@ class ProductsView{
                 <button>Enchérir</button>
             </div>
         `);
+    }
+    #addButtonListeners() {
+        const buttons = document.querySelectorAll('.product button');
+        buttons.forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const id = event.target.dataset.id;
+                const result = await ProductsService.bid(id);
+                if (result) {
+                    location.reload();
+                }
+            });
+        });
     }
 
     
