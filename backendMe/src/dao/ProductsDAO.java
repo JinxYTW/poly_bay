@@ -39,6 +39,8 @@ public class ProductsDAO {
 
     }
 
+    
+
     public void bid(int id){
         try {
             PolyBayDatabase database = new PolyBayDatabase();

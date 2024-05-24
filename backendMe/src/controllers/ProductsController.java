@@ -20,5 +20,12 @@ public class ProductsController {
         return products;
     }
     
+    public static void bid(WebServerContext context) {
+        int productId = Integer.parseInt(context.getRequest().getParam("productId"));
+        ProductsDAO productsDAO = new ProductsDAO();
+        productsDAO.bid(productId);
+    
+        context.getResponse().json("Bid placed successfully for product id: " + productId);
+    }
 }
 

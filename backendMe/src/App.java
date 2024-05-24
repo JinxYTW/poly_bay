@@ -20,14 +20,12 @@ public class App {
         webServer.getRouter().get("/products", 
         (WebServerContext context) -> {ProductsController.findAll(context);});
             
-    
-
-        
-
-
         for (Product product : productsDAO.findAll()) {
             System.out.println(product);
         }
+
+        webServer.getRouter().post("/bid/:productId",
+        (WebServerContext context) -> {ProductsController.bid(context);});
         
 
     }
