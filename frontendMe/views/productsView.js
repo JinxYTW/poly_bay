@@ -13,7 +13,7 @@ class ProductsView{
         for (let product of products){
             this.#displayProducts(product);
         }
-        this.#addButtonListeners();
+    //    this.#addButtonListeners();
         
     }
     #displayProducts(product){
@@ -23,22 +23,18 @@ class ProductsView{
                 <span>${product.name}</span>
                 <span>${product.owner}</span>
                 <span>${product.bid}</span>
-                <button>Enchérir</button>
+                <button id="btn_${product.id}">Enchérir</button>
             </div>
         `);
-    }
-    #addButtonListeners() {
-        const buttons = document.querySelectorAll('.product button');
-        buttons.forEach(button => {
-            button.addEventListener('click', async (event) => {
-                const id = event.target.dataset.id;
-                const result = await ProductsService.bid(id);
-                if (result) {
-                    location.reload();
-                }
-            });
+        document.getElementById("btn_"+product.id).addEventListener
+        ('click', async () => {
+            const result = await ProductsService.bid(product.id);
+            if (result){
+                location.reload();
+            }
         });
     }
+    
 
     
 }
