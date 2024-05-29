@@ -22,16 +22,20 @@ class ProductsView{
             <div class="product">
                 <span>${product.name}</span>
                 <span>${product.owner}</span>
-                <span>${product.bid}</span>
+                <span id = "bid_${product.id}">${product.bid}</span>
                 <button id="btn_${product.id}">Enchérir</button>
             </div>
         `);
         document.getElementById("btn_"+product.id).addEventListener
         ('click', async () => {
             const result = await ProductsService.bid(product.id);
-            if (result){
-                location.reload();
+            if(result){
+                const bidElement = document.getElementById("bid_"+product.id);
+                bidElement.textContent = result.bid;
             }
+
+            
+            
         });
     }
     

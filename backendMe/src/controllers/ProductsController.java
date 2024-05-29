@@ -7,6 +7,7 @@ import models.Product;
 import webserver.WebServerContext;
 import webserver.WebServerResponse;
 
+
 public class ProductsController {
     private static ProductsDAO productsDAO = new ProductsDAO();
 
@@ -19,13 +20,19 @@ public class ProductsController {
         
         return products;
     }
-    
     public static void bid(WebServerContext context) {
         int productId = Integer.parseInt(context.getRequest().getParam("productId"));
         ProductsDAO productsDAO = new ProductsDAO();
-        productsDAO.bid(productId);
+        float newBid = productsDAO.bid(productId);
+
     
-        context.getResponse().json("Bid placed successfully for product id: " + productId);
+        Product jsonResponse = new Product(productId, "", "", newBid);
+        context.getResponse().json(jsonResponse);
     }
+
+    
+
+    
+    
 }
 

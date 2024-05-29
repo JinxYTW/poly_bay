@@ -41,7 +41,8 @@ public class ProductsDAO {
 
     
 
-    public void bid(int id){
+    public float bid(int id){
+        float newBid = 0;
         try {
             PolyBayDatabase database = new PolyBayDatabase();
             PreparedStatement getStatement = database.prepareStatement("SELECT * FROM product WHERE id = ?");
@@ -54,7 +55,7 @@ public class ProductsDAO {
             }
     
             
-            float newBid = currentBid + 50;
+            newBid = currentBid + 50;
     
             
             PreparedStatement updateStatement = database.prepareStatement("UPDATE product SET bid = ? WHERE id = ?");
@@ -65,6 +66,8 @@ public class ProductsDAO {
         } catch (SQLException exception) {
             System.err.println("An error occurred while preparing the statement.");
         }
+        return newBid;
 }
+    
 }
 

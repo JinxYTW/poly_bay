@@ -21,10 +21,14 @@ class ProductsService {
     });
 
     if(response.status === 200) {
-      return true;
+      const data = await response.json();
+      console.log(data);
+      return data;
+
     } else {
       return false;
     }
   }
+
 }
 export {ProductsService}
